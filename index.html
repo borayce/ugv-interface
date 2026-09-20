@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGV Telemetry & Edge Control Dashboard</title>
+    
+    <!-- Leaflet harita kütüphanesi - Leaflet map library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <!-- Yerel css dosyası - Local CSS file-->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="notification" class="notification"></div>
+
+    <header class="dashboard-header">
+        <div class="logo">UGV Telemetry</div>
+        <div id="saat">00:00:00</div>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- Telemetri paneli - Telemetry panel -->
+        <div class="panel">
+            <h3>Sistem Verileri</h3>
+            <div id="thermometer">
+                <div class="temperature-text" id="temperature-text">Loading...</div>
+                <div class="mercury" id="mercury"></div>
+            </div>
+            
+            <div class="battery-wrapper">
+                <div id="battery-container">
+                    <div id="battery-level"></div>
+                </div>
+                <div id="battery-percentage">Loading...</div>
+                <div id="voltage"></div>
+            </div>
+        </div>
+
+        <!-- Sürüş ve durum paneli - Drive and status panel -->
+        <div class="panel">
+            <h3>Hareket ve Durum</h3>
+            <div id="velocity">Hız: Yükleniyor...</div>
+            <div id="runningStatus">Araç Durumu: Yükleniyor...</div>
+            <div id="time">Çalışma Süresi: 00:00:00</div>
+            
+            <div class="motor-controls">
+                <button onclick="sendCommand('forward')">İLERİ</button>
+                <div class="control-row">
+                    <button onclick="sendCommand('left')">SOL</button>
+                    <button id="acilStop" class="stop-btn" onclick="sendCommand('stop')">ACİL STOP</button>
+                    <button onclick="sendCommand('right')">SAĞ</button>
+                </div>
+                <button onclick="sendCommand('backward')">GERİ</button>
+            </div>
+            
+            <div class="tool-controls">
+                <button onclick="sendCommand('down')">ÇAPA İNDİR</button>
+                <button onclick="sendCommand('up')">ÇAPA KALDIR</button>
+            </div>
+        </div>
+
+        <!-- GPS ve harita - GPS and map -->
+        <div class="panel">
+            <h3>Konum (GPS)</h3>
+            <div id="gps-data">GPS Verisi Bekleniyor...</div>
+            <div id="mapLink"></div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- JS dosyası - JS file -->
+    <script src="app.js"></script>
+</body>
+</html>
